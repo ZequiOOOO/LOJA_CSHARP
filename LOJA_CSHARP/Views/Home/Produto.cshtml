@@ -1,0 +1,56 @@
+﻿@model ProdutoViewModel;
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+<main>
+    <header>
+        <h1>Produtos</h1>
+    </header>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="CadastrarProduto">Cadastrar Produto</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+                <th>Data Adicionado</th>
+                <th colspan="2">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var produto in Model.listaProduto)
+                {
+                    <tr>
+                        <td>@produto.Id</td>
+                        <td>@produto.Nome</td>
+                        <td>@produto.Descricao</td>
+                        <td>@produto.Preco</td>
+                        <td>@produto.Estoque</td>
+                        <td>@produto.DataAdicionado.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="CadastrarProduto" asp-controller="Home" asp-route-id="@produto.Id">Editar</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-action="DeletarProduto" asp-controller="Home" asp-route-id="@produto.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    @if (Model.ExisteErros)
+    {
+        foreach (var erro in Model.erros)
+        {
+            <div class="alert alert-danger">
+                @erro
+            </div>
+        }
+    }
+</main>

@@ -1,0 +1,40 @@
+﻿@model Produto?
+
+@{
+    ViewData["Title"] = "Cadastrar Produto";
+}
+<h1>@ViewData["Title"]</h1>
+
+@using (Html.BeginForm("PersistirProduto", "Home", FormMethod.Post))
+{
+    <div>
+        <input type="hidden" name="Id" value="@Model?.Id" />
+    </div>
+    <div>
+        Nome<input type="text" name="Nome" value="@Model?.Nome" />
+    </div>
+    <div>
+        Descrição<input type="text" name="Descricao" value="@Model?.Descricao" />
+    </div>
+    <div>
+        Preço<input type="text" name="Preco" value="@Model?.Preco" />
+    </div>
+    <div>
+        Estoque<input type="text" name="Estoque" value="@Model?.Estoque" />
+    </div>
+    <div>
+        Data de Adição<input type="text" name="DataAdicionado" value="@Model?.DataAdicionado.ToString("yyyy-MM-dd HH:mm:ss")" />
+    </div>
+    <div>
+        <button class="btn btn-success">
+            @{
+                var nomeBotao = "Adicionar";
+                if (Model != null)
+                {
+                    nomeBotao = "Editar";
+                }
+            }
+            @nomeBotao
+        </button>
+    </div>
+}
